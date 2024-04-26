@@ -3,7 +3,7 @@ import React from 'react'
 
 const LandingPage = () => {
   return (
-    <View>
+    <View style={styles.container}>
         <View style={styles.firstTitle}>
             <Text style={{
             fontWeight:'bold',
@@ -22,7 +22,7 @@ const LandingPage = () => {
         </View>
         <View style={{flex:1,padding:10}}>
             <TouchableOpacity>
-            <View style={{backgroundColor:'#331b0b',borderRadius:20,}}>
+            <View style={{backgroundColor:'#331b0b',borderRadius:20,padding:13,}}>
                 <Text style={styles.btnSignIn}> Sign In</Text>
             </View>
             
@@ -42,4 +42,22 @@ const LandingPage = () => {
 
 export default LandingPage
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        backgroundColor: '#859e75',
+        // margin:20,
+        // alignItems: 'center',
+        justifyContent: 'center',
+    },
+    firstTitle:{
+        alignItems:'center',
+        marginTop:30,
+    },
+
+    btnSignIn: {
+        color:'white',
+        textAlign:'center',
+        fontWeight:'bold'
+    }
+})
