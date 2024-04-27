@@ -1,14 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
-// import AllApp from './screens/Nav/navContainer';
-import LandingPage from './screens/LandingPage';
+import { NavigationContainer } from '@react-navigation/native';
+import Navigation from './screens/Nav/navigation';
+import NavContainers from './screens/Nav/NavContainers';
 
 const App = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <LandingPage/>
-    </View>
-
+    <NavContainers/>
   );
 };
 

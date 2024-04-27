@@ -4,11 +4,8 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Log In Authentication</Text>
-      <TextInput
-        placeholder='holding Full Name'
-        style={styles.txtInputs}
-      />
+      <Text style={{textAlign:'center',fontWeight:'bold', fontSize:20,marginBottom:15,}}>Log In Authentication</Text>
+      
        <TextInput
         placeholder='holding Email Address'
         keyboardType='email-address'
@@ -20,8 +17,13 @@ export default function App() {
         secureTextEntry={true}
         style={styles.txtInputs}
       />
-    
-      <StatusBar style="auto" />
+
+      <TouchableOpacity >
+          <View style={{backgroundColor:'#331b0b',borderRadius:20,padding:13, alignItems:'center', margin:15,}}>
+              <Text style={styles.btnSignIn}> Log In</Text>
+          </View>
+            
+      </TouchableOpacity>
     </View>
   );
 }
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#859e75',
-    margin:20,
+    // margin:20,
     // alignItems: 'center',
     justifyContent: 'center',
   },
@@ -39,5 +41,10 @@ const styles = StyleSheet.create({
     borderWidth:1,
     padding:5,
 
+  },
+  btnSignIn: {
+    color:'white',
+    textAlign:'center',
+    fontWeight:'bold'
   }
 });
