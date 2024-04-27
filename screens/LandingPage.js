@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, StatusBar } from 'react-native'
 import React from 'react'
+import { supabase } from './supabase/SupabaseClient';
 
 // const navigation = useNavigation();
 const LandingPage = ({navigation}) => {
@@ -11,6 +12,12 @@ const LandingPage = ({navigation}) => {
       const navigateToLogIn = () => {
         navigation.navigate('LogIn');
       };
+    
+    const login = async () => {
+        await supabase.auth.signInWithPassword({
+            provider:'Google'
+        })
+    }
   return (
     <View style={styles.container}>
         <View style={styles.firstTitle}>
@@ -42,8 +49,12 @@ const LandingPage = ({navigation}) => {
                 <Text style={{fontSize:12, color:'#331b0b', fontWeight:'bold'}}> Log In</Text>
             </TouchableOpacity>
             </View>  
-        </View>
 
+            <TouchableOpacity onPress={login}>
+                <Text> Sign in with Google</Text>
+            </TouchableOpacity>
+        </View>
+        
         <StatusBar style='light-content' />
     </View>
   )

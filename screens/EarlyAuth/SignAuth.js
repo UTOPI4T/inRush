@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
+import { supabase } from '../supabase/SupabaseClient'; 
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 
 export default function SignAuth({navigation}) {
@@ -13,35 +14,35 @@ export default function SignAuth({navigation}) {
     setFormData({ ...formData, [fieldName]: text });
   };
   
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     const { username, email, password } = formData;
   
     if (!username || !email || !password) {
-      // Alert user if any of the required fields is empty
       Alert.alert(
         'Missing Information',
-        'Please fill in both email and password fields.',
-        [
-          { text: 'OK', onPress: () => console.log('Missing Information Alert Closed') }
-        ],
+        'Please fill all the input fields.',
+        [{ text: 'OK', onPress: () => console.log('Missing Information Alert Closed') }],
         { cancelable: false }
       );
       return;
     }
   
-    // Display login details only if at least one field is filled
-    Alert.alert(
-      'Login Details',
-      `Isername: ${username}\nEmail: ${email}\nPassword: ${password}`,
-      [
-        { text: 'Cancel', onPress: () => console.log('Authentication Canceled'), style: 'cancel' },
-        { text: 'OK', onPress: () => {
-          console.log('OK Pressed');
-          SignInSucceed();
-        }}
-      ],
-      { cancelable: false }
-    );
+    try {
+      const { user, error } = await supabase.auth.signUp({
+        username,
+        email,
+        password,
+      });
+  
+      if (error) {
+        Alert.alert('Sign in failed', error.message);
+      } else {
+        Alert.alert('Sign in successful', `Welcome back, ${user.email}`);
+        SignInSucceed();
+      }
+    } catch (error) {
+      console.error('Error signing in:', error.message);
+    }
   };
 
 
