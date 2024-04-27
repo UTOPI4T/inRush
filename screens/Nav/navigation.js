@@ -6,8 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LandingPage from '../LandingPage';
 import SignInScreen from '../EarlyAuth/SignAuth';
 import LogInScreen from '../EarlyAuth/LoginAuth';
-import PageAfterLogIn from '../EarlyAuth/pageAfterLogin';
-import PageAfterSignIn from '../EarlyAuth/pageAfterSignIn';
+import PageAfterLogIn from '../EarlyAuth/PageAfterLogin';
+import PageAfterSignIn from '../EarlyAuth/PageAfterSignIn';
 
 const Stack = createStackNavigator();
 

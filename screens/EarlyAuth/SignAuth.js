@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 
-export default function App({navigation}) {
+export default function SignAuth({navigation}) {
   const [formData, setFormData] = useState({
     username: '',
     email: '',

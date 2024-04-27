@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const pageAfterLogin = () => {
+const PageAfterLogIn = () => {
   return (
     <View>
-      <Text>pageAfterLogin</Text>
+      <Text>PageAfterLogIn</Text>
     </View>
   )
 }
 
-export default pageAfterLogin
+export default PageAfterLogIn
 
 const styles = StyleSheet.create({})
