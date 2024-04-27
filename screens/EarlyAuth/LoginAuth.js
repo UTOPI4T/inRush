@@ -3,20 +3,32 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 
 export default function App({navigation}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-  const handleEmailChange = (text) => {
-    setEmail(text);
-  };
-
-  const handlePasswordChange = (text) => {
-    setPassword(text);
+  const handleInputChange = (fieldName, text) => {
+    setFormData({ ...formData, [fieldName]: text });
   };
 
   const handleLogin = () => {
-    // Here you can perform any validation or further processing
-    // For demonstration, let's just display the entered email and password in an alert
+    const { email, password } = formData;
+  
+    if (!email || !password) {
+      // Alert user if any of the required fields is empty
+      Alert.alert(
+        'Missing Information',
+        'Please fill in both email and password fields.',
+        [
+          { text: 'OK', onPress: () => console.log('Missing Information Alert Closed') }
+        ],
+        { cancelable: false }
+      );
+      return;
+    }
+  
+    // Display login details only if at least one field is filled
     Alert.alert(
       'Login Details',
       `Email: ${email}\nPassword: ${password}`,
@@ -29,7 +41,8 @@ export default function App({navigation}) {
       ],
       { cancelable: false }
     );
-  }  
+  };
+  
 
   const LogInSucceed = () => {
     navigation.navigate('PageAfterLogIn');
@@ -45,14 +58,14 @@ export default function App({navigation}) {
         placeholder='holding Email Address'
         keyboardType='email-address'
         style={styles.txtInputs}
-        onChangeText={handleEmailChange}
+        onChangeText={(text) => handleInputChange('email', text)}
       />
       <TextInput
         placeholder='holding Password'
         keyboardType='default'
         secureTextEntry={true}
         style={styles.txtInputs}
-        onChangeText={handlePasswordChange}
+        onChangeText={(text) => handleInputChange('password', text)}
       />
 
       <TouchableOpacity onPress={handleLogin}>

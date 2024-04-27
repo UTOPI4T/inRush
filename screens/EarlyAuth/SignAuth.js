@@ -3,26 +3,36 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 
 export default function App({navigation}) {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
 
-  const handleUsernameChange = (text) => {
-    setUsername(text);
-  }
-
-  const handleEmailChange = (text) => {
-    setEmail(text);
-  };
-
-  const handlePasswordChange = (text) => {
-    setPassword(text);
+  const handleInputChange = (fieldName, text) => {
+    setFormData({ ...formData, [fieldName]: text });
   };
   
-  const handleSignIn  = () => {
+  const handleSignIn = () => {
+    const { username, email, password } = formData;
+  
+    if (!username || !email || !password) {
+      // Alert user if any of the required fields is empty
+      Alert.alert(
+        'Missing Information',
+        'Please fill in both email and password fields.',
+        [
+          { text: 'OK', onPress: () => console.log('Missing Information Alert Closed') }
+        ],
+        { cancelable: false }
+      );
+      return;
+    }
+  
+    // Display login details only if at least one field is filled
     Alert.alert(
       'Login Details',
-      `Username: ${username}\nEmail: ${email}\nPassword: ${password}`,
+      `Isername: ${username}\nEmail: ${email}\nPassword: ${password}`,
       [
         { text: 'Cancel', onPress: () => console.log('Authentication Canceled'), style: 'cancel' },
         { text: 'OK', onPress: () => {
@@ -31,8 +41,8 @@ export default function App({navigation}) {
         }}
       ],
       { cancelable: false }
-      );
-  }
+    );
+  };
 
 
   const SignInSucceed = () => {
@@ -45,20 +55,20 @@ export default function App({navigation}) {
       <TextInput
         placeholder='holding Full Name or Username'
         style={styles.txtInputs}
-        onChangeText={handleUsernameChange}
+        onChangeText={(text) => handleInputChange('username', text)}
       />
        <TextInput
         placeholder='holding Email Address'
         keyboardType='email-address'
         style={styles.txtInputs}
-        onChangeText={handleEmailChange}
+        onChangeText={(text) => handleInputChange('email', text)}
       />
        <TextInput
         placeholder='holding Password'
         keyboardType='default'
         secureTextEntry={true}
         style={styles.txtInputs}
-        onChangeText={handlePasswordChange}
+        onChangeText={(text) => handleInputChange('password', text)}
       />
       <TouchableOpacity onPress={handleSignIn} >
         <View style={{backgroundColor:'#331b0b',borderRadius:20,padding:13, alignItems:'center', margin:15,}}>
